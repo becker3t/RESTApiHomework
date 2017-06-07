@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button fetchUserBtn;
     Button listViewBtn;
     Button recyclerViewBtn;
+    Button clearUsersBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listViewBtn.setOnClickListener(this);
         recyclerViewBtn = (Button) findViewById(R.id.toRecyclerViewBtn);
         recyclerViewBtn.setOnClickListener(this);
+        clearUsersBtn = (Button) findViewById(R.id.clearUsersBtn);
+        clearUsersBtn.setOnClickListener(this);
 
         if(getIntent().getExtras() != null) {
             parcelableUserArrayList = getIntent().getExtras().getParcelableArrayList(USER_LIST_KEY);
@@ -111,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(i);
     }
 
+    private void clearUsers() {
+        parcelableUserArrayList.clear();
+    }
+
     private String getNameString(Result r) {
         StringBuilder builder = new StringBuilder();
         builder.append(getString(R.string.user_name_label));
@@ -160,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.toRecyclerViewBtn:
                 startRecyclerView();
+                break;
+            case R.id.clearUsersBtn:
+                clearUsers();
                 break;
         }
     }

@@ -7,4 +7,5 @@
     <string name="recycler_view_btn_lbl">To RecyclerView</string>
     <string name="list_view_btn_lbl">To ListView</string>
     <string name="back_btn_lbl">Back</string>
+    <string name="clear_users_btn">Clear Users</string>
 </resources>

@@ -24,7 +24,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        if(getIntent() != null) {
+        if(getIntent().getExtras() != null) {
             userList = getIntent().getExtras().getParcelableArrayList(MainActivity.USER_LIST_KEY);
         }
         else {

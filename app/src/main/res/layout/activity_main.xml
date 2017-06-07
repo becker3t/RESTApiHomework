@@ -52,4 +52,11 @@
         android:id="@+id/toRecyclerViewBtn"
         android:text="@string/recycler_view_btn_lbl" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/clearUsersBtn"
+        android:text="@string/clear_users_btn" />
+
 </LinearLayout>

@@ -28,7 +28,12 @@ public class RecyclerActivity extends AppCompatActivity implements View.OnClickL
         recyclerView = (RecyclerView) findViewById(R.id.userRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        userList = getIntent().getParcelableArrayListExtra(MainActivity.USER_LIST_KEY);
+        if(getIntent().getExtras() != null) {
+            userList = getIntent().getExtras().getParcelableArrayList(MainActivity.USER_LIST_KEY);
+        }
+        else {
+            userList = new ArrayList<>();
+        }
 
         backToMainBtn = (Button) findViewById(R.id.btnBackToMain);
         backToMainBtn.setOnClickListener(this);

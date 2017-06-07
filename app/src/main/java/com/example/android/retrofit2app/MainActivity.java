@@ -1,5 +1,6 @@
 package com.example.android.retrofit2app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.android.retrofit2app.entities.ParcelableUser;
 import com.example.android.retrofit2app.entities.Result;
 import com.example.android.retrofit2app.entities.User;
 
@@ -23,13 +25,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = MainActivity.class.getSimpleName() + "_TAG";
     private static final String RETROFIT_BASE_URL ="https://randomuser.me/";
 
-    private ArrayList<Result> resultArrayList;
+    public static final String USER_LIST_KEY = "user_list";
+
+    private ArrayList<ParcelableUser> parcelableUserArrayList;
 
     TextView nameTv;
     TextView addressTv;
     TextView emailTv;
 
     Button fetchUserBtn;
+    Button listViewBtn;
+    Button recyclerViewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fetchUserBtn = (Button) findViewById(R.id.fetchUserBtn);
         fetchUserBtn.setOnClickListener(this);
+        listViewBtn = (Button) findViewById(R.id.toListViewBtn);
+        listViewBtn.setOnClickListener(this);
+        recyclerViewBtn = (Button) findViewById(R.id.toRecyclerViewBtn);
+        recyclerViewBtn.setOnClickListener(this);
 
-        resultArrayList = new ArrayList<>();
+        parcelableUserArrayList = new ArrayList<>();
     }
 
     private void startNetworkCall() {
@@ -60,15 +70,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     User user = response.body();
 
                     for (Result r : user.getResults()) {
-                        resultArrayList.add(r);
                         final String userName = getNameString(r);
                         final String userAddress = getAddressString(r);
                         final String userEmail = getEmailString(r);
 
+                        parcelableUserArrayList.add(new ParcelableUser(userName, userAddress, userEmail));
+
                         setTextViews(userName, userAddress, userEmail);
                     }
 
-                    Log.d(TAG, "onResponse: array size = " + resultArrayList.size());
+                    Log.d(TAG, "onResponse: array size = " + parcelableUserArrayList.size());
                 }
             }
 
@@ -77,6 +88,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 t.printStackTrace();
             }
         });
+    }
+
+    private void startRecyclerView() {
+        Intent i = new Intent(MainActivity.this, RecyclerActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(USER_LIST_KEY, parcelableUserArrayList);
+        i.putExtras(b);
+        startActivity(i);
+    }
+
+    private void startListView() {
+        Intent i = new Intent(MainActivity.this, ListActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(USER_LIST_KEY, parcelableUserArrayList);
+        i.putExtras(b);
+        startActivity(i);
     }
 
     private String getNameString(Result r) {
@@ -122,6 +149,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.fetchUserBtn:
                 startNetworkCall();
+                break;
+            case R.id.toListViewBtn:
+                startListView();
+                break;
+            case R.id.toRecyclerViewBtn:
+                startRecyclerView();
                 break;
         }
     }

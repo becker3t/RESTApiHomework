@@ -6,4 +6,5 @@
     <string name="fetch_btn_label">Fetch New User</string>
     <string name="recycler_view_btn_lbl">To RecyclerView</string>
     <string name="list_view_btn_lbl">To ListView</string>
+    <string name="back_btn_lbl">Back</string>
 </resources>

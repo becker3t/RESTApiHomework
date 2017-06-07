@@ -53,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerViewBtn = (Button) findViewById(R.id.toRecyclerViewBtn);
         recyclerViewBtn.setOnClickListener(this);
 
-        parcelableUserArrayList = new ArrayList<>();
+        if(getIntent().getExtras() != null) {
+            parcelableUserArrayList = getIntent().getExtras().getParcelableArrayList(USER_LIST_KEY);
+        }
+        else {
+            parcelableUserArrayList = new ArrayList<>();
+        }
     }
 
     private void startNetworkCall() {

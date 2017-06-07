@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Retrofit2App</string>
+    <string name="user_name_label">Name:</string>
+    <string name="user_address_label">Address:</string>
+    <string name="user_email_label">Email:</string>
+    <string name="fetch_btn_label">Fetch New User</string>
+    <string name="recycler_view_btn_lbl">To RecyclerView</string>
+    <string name="list_view_btn_lbl">To ListView</string>
+</resources>

@@ -18,8 +18,6 @@ public class RecyclerActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<ParcelableUser> userList;
     UserRecyclerAdapter recyclerAdapter;
 
-    private Button backToMainBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class RecyclerActivity extends AppCompatActivity implements View.OnClickL
             userList = new ArrayList<>();
         }
 
-        backToMainBtn = (Button) findViewById(R.id.btnBackToMain);
+        Button backToMainBtn = (Button) findViewById(R.id.btnBackToMain);
         backToMainBtn.setOnClickListener(this);
     }
 

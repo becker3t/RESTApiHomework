@@ -55,7 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerViewBtn.setOnClickListener(this);
         clearUsersBtn = (Button) findViewById(R.id.clearUsersBtn);
         clearUsersBtn.setOnClickListener(this);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        
         if(getIntent().getExtras() != null) {
             parcelableUserArrayList = getIntent().getExtras().getParcelableArrayList(USER_LIST_KEY);
         }
